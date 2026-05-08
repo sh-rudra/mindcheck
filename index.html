@@ -1134,6 +1134,10 @@
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen' + n).classList.add('active');
       if (n === 4) renderSaved();
+      if (n === 1) {
+        document.getElementById('moodInput').value = '';
+        document.getElementById('charCount').textContent = '0';
+      }
     }
 
     function submitCheckin() {
@@ -1199,8 +1203,6 @@
     function dismissSuggestion() {
       showToast('Got it — we\'ll refine future suggestions.');
       setTimeout(() => goToScreen(1), 1400);
-      document.getElementById('moodInput').value = '';
-      document.getElementById('charCount').textContent = '0';
     }
 
     function showToast(msg) {
