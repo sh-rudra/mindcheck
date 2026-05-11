@@ -1840,10 +1840,10 @@
       let best = null, bestScore = 0;
       for (const cat of CATEGORIES) { if (!cat.keywords.length) continue; const m = cat.keywords.filter(kw => lower.includes(kw)); if (m.length > bestScore) { bestScore = m.length; best = cat; } }
       const matchedCats = CATEGORIES.filter(cat => cat.keywords.length > 0 && cat.keywords.some(kw => lower.includes(kw)));
-      if (!best || bestScore === 0) { const mixed = CATEGORIES.find(c => c.name === 'mixed'); return { text: getRotatedResponse('mixed', mixed.responses), confidence: 'moderate', reason: 'Based on: general emotional content detected in your check-in', summary: "sharing what's on your mind" }; }
+      if (!best || bestScore === 0) { const mixed = CATEGORIES.find(c => c.name === 'mixed'); return { text: getRotatedResponse('mixed', mixed.responses), confidence: 'moderate', reason: 'Based on: general emotional content detected in your check-in', summary: "sharing what's on your mind", category: 'mixed' }; }
       let confidence = best.confidence;
       if (matchedCats.length >= 2) confidence = 'moderate';
-      return { text: getRotatedResponse(best.name, best.responses), confidence, reason: best.reason, summary: best.summary };
+      return { text: getRotatedResponse(best.name, best.responses), confidence, reason: best.reason, summary: best.summary, category: best.name };
     }
     let savedSuggestions = loadFromCookie(), currentSuggestion = {};
     function updateChar() { document.getElementById('charCount').textContent = document.getElementById('moodInput').value.length; }
@@ -1868,7 +1868,7 @@
       setTimeout(() => {
         const result = analyseInput(input);
         if (result.crisis) { currentSuggestion = { text: "It sounds like you may be going through something very difficult right now. Please reach out to someone you trust today. In Bangladesh, Kaan Pete Roi offers confidential mental health support at 01779-554391. You don't have to carry this alone.", confidence: 'low', reason: 'Based on: your message suggests you may need immediate human support', input: 'going through a very difficult time', rawInput: input, date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) }; }
-        else { currentSuggestion = { text: result.text, confidence: result.confidence, reason: result.reason, input: result.summary, rawInput: input, date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) }; }
+        else { currentSuggestion = { text: result.text, confidence: result.confidence, reason: result.reason, input: result.summary, rawInput: input, category: result.category || '', date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) }; }
         showResult();
       }, 600 + Math.random() * 400);
     }
@@ -1943,6 +1943,74 @@
       else { ctx.className = 's5-context collapsed'; lbl.textContent = 'Show context'; ico.className = 's5-toggle-icon'; }
     }
 
+    /* ── FOLLOW-UP RESPONSE ENGINE ── */
+    const FOLLOWUP_RESPONSES = {
+      academic_stress: [
+        "It sounds like the academic pressure is still weighing on you. Remember — you don't have to tackle everything at once. Pick the single most urgent task and give it 25 minutes of focused effort. That one step forward matters more than you think.",
+        "When coursework feels relentless, your brain needs micro-breaks to stay effective. Try the Pomodoro method: 25 minutes on, 5 minutes completely off. After four rounds, take a longer break. Small rhythms build big momentum over time.",
+        "Stress about grades often comes from zooming too far out. Instead of thinking about your final result, just focus on what you can do today — one page, one problem, one email sent. Progress compounds quietly."
+      ],
+      overwhelm: [
+        "It sounds like things still feel heavy. When you're overwhelmed, your nervous system is in overload — the most helpful thing isn't to push harder but to give yourself 5–10 minutes of complete stillness. Even sitting quietly with a glass of water can begin to reset things.",
+        "Overwhelm usually means too many open loops in your head. Try writing every single thing down — not to solve them, just to get them out. Once they're on paper, your brain stops trying to hold them all and you can breathe again.",
+        "When everything feels urgent, nothing gets done well. Pick just one thing — not the most important, just the easiest — and finish it completely. That small win shifts the feeling from stuck to moving."
+      ],
+      loneliness: [
+        "Loneliness can feel louder the longer it goes unacknowledged. Is there one person — even someone you haven't spoken to in a while — you could send a short message to today? It doesn't have to be deep. Just a small connection.",
+        "It takes time to build real friendships, especially at university. Being around people regularly — even in low-pressure settings like a study space or a club — creates the familiarity that eventually grows into connection. Consistency matters more than grand gestures.",
+        "Missing people from home is completely normal during transitions. Try scheduling a regular call rather than leaving it to chance — having something fixed on the calendar gives you something to look forward to and keeps the connection alive."
+      ],
+      sleep: [
+        "Sleep problems often get worse when you start worrying about not sleeping. Try removing the pressure — tell yourself it's okay to just rest even if you don't fall asleep. Lying still with your eyes closed is still restful for your body.",
+        "A consistent wind-down routine signals to your brain that sleep is coming. Even 15 minutes of something calm — reading, slow stretching, quiet music — before bed can make a real difference over a few days.",
+        "If racing thoughts are keeping you awake, try writing them down before bed. A simple brain dump — even just bullet points — helps your mind let go because it knows the thoughts are safely stored somewhere."
+      ],
+      motivation: [
+        "Low motivation is often your body asking for rest, not a sign that something is wrong with you. Before pushing harder, ask honestly: when did you last do something just for enjoyment? Even 20 minutes of something you like can refill the tank.",
+        "The hardest part of any task is starting. Try committing to just 2 minutes — you're allowed to stop after that. Most of the time, starting is enough to build momentum and the 2 minutes turns into much more.",
+        "When nothing feels meaningful, it helps to zoom in rather than out. Don't ask 'what's the point of all this' — just ask 'what's one small thing I can do right now?' Meaning often follows action, not the other way around."
+      ],
+      future_career: [
+        "Career uncertainty feels scarier when you compare your inside experience to other people's outside confidence. Most people are quietly figuring it out too. Focus on building one skill or making one connection this week — direction becomes clearer through small actions.",
+        "It helps to separate what you can control from what you can't. You can't control the job market or timing, but you can control what you learn, who you talk to, and how you present yourself. Put your energy only into that first column.",
+        "Feeling lost about your future is not a sign that you're behind — it's a sign that you're at a genuine decision point. Talk to one person whose path interests you, not to copy them, but just to hear how someone else navigated the same fog."
+      ],
+      mixed: [
+        "It sounds like several things are still tangled together. When feelings are mixed, it often helps to just name the strongest one — not to fix it, just to acknowledge it. What would you say is sitting heaviest right now?",
+        "Sometimes the most helpful thing isn't advice but just a moment to breathe. You don't have to have it all figured out. Is there one small kind thing you could do for yourself in the next hour?",
+        "Mixed feelings can be exhausting to carry. When you're not sure what you need, start with the basics — water, food, a short walk outside. Your body and mind are more connected than they seem."
+      ],
+      crisis: [
+        "I'm really glad you're still here talking. Please reach out to Kaan Pete Roi at 01779-554391 — they're trained to support exactly what you're going through and will listen without judgment.",
+        "What you're feeling right now is real and serious, and you deserve real support. Please contact Kaan Pete Roi (01779-554391) or someone you trust. You don't have to carry this alone."
+      ],
+      default: [
+        "Thank you for sharing more. It takes courage to keep talking about how you're feeling. What feels most pressing for you right now?",
+        "I hear you. Sometimes just putting feelings into words is the first step. Is there a specific part of what you're going through you'd like to explore a bit more?",
+        "That makes sense given what you shared earlier. What would feel most helpful to focus on right now — practical steps, or just talking through how you're feeling?"
+      ]
+    };
+
+    function getChatResponse(userInput, originalCategory) {
+      const lower = userInput.toLowerCase();
+      if (CRISIS_KEYWORDS.some(kw => lower.includes(kw))) {
+        return getRotatedResponse('crisis_chat', FOLLOWUP_RESPONSES.crisis);
+      }
+      let best = null, bestScore = 0;
+      for (const cat of CATEGORIES) {
+        if (!cat.keywords.length) continue;
+        const m = cat.keywords.filter(kw => lower.includes(kw));
+        if (m.length > bestScore) { bestScore = m.length; best = cat; }
+      }
+      if (best && bestScore > 0 && FOLLOWUP_RESPONSES[best.name]) {
+        return getRotatedResponse('chat_' + best.name, FOLLOWUP_RESPONSES[best.name]);
+      }
+      if (originalCategory && FOLLOWUP_RESPONSES[originalCategory]) {
+        return getRotatedResponse('chat_orig_' + originalCategory, FOLLOWUP_RESPONSES[originalCategory]);
+      }
+      return getRotatedResponse('chat_default', FOLLOWUP_RESPONSES.default);
+    }
+
     function s5Resize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 90) + 'px'; }
     function s5Keydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); s5Send(); } }
 
@@ -1955,8 +2023,7 @@
       const area = document.getElementById('s5ChatArea');
       const empty = document.getElementById('s5EmptyChat');
       if (empty) empty.remove();
-      if (!contextExpanded) { toggleContext(); }
-      setTimeout(() => toggleContext(), 80);
+      if (contextExpanded) { setTimeout(() => toggleContext(), 80); }
       const userBubble = document.createElement('div');
       userBubble.className = 's5-bubble user';
       userBubble.textContent = input;
@@ -1966,31 +2033,14 @@
       thinkBubble.innerHTML = '<div class="s5-bubble-from">MindCheck</div><div class="s5-bubble-text">Thinking…</div>';
       area.appendChild(thinkBubble);
       area.scrollTop = area.scrollHeight;
-      activeChatHistory.push({ role: 'user', content: input });
-      const systemPrompt = `You are MindCheck, a supportive AI mental health companion for university students. Keep responses warm, practical, and concise (2–4 sentences max). Never diagnose. Always encourage professional help for serious concerns.\n\nContext — the student's original check-in: "${activeSuggestion.rawInput || activeSuggestion.input}"\nYour earlier suggestion: "${activeSuggestion.text}"`;
-      const messages = [{ role: 'user', content: `[System context]\n${systemPrompt}` }, { role: 'assistant', content: "Understood. I'm here to continue supporting you." }, ...activeChatHistory];
-      fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 300, messages })
-      })
-        .then(r => r.json())
-        .then(data => {
-          const reply = (data.content && data.content.map(b => b.text || '').join('')) || "I'm here with you. Could you tell me a bit more about what you're feeling right now?";
-          activeChatHistory.push({ role: 'assistant', content: reply });
-          thinkBubble.className = 's5-bubble ai';
-          thinkBubble.innerHTML = `<div class="s5-bubble-from">MindCheck</div><div class="s5-bubble-text">${reply}</div>`;
-          area.scrollTop = area.scrollHeight;
-          document.getElementById('s5SendBtn').disabled = false;
-          document.getElementById('s5Input').focus();
-        })
-        .catch(() => {
-          const fallback = "I'm here to listen. What's on your mind right now?";
-          thinkBubble.className = 's5-bubble ai';
-          thinkBubble.innerHTML = `<div class="s5-bubble-from">MindCheck</div><div class="s5-bubble-text">${fallback}</div>`;
-          activeChatHistory.push({ role: 'assistant', content: fallback });
-          document.getElementById('s5SendBtn').disabled = false;
-          area.scrollTop = area.scrollHeight;
-        });
+      setTimeout(() => {
+        const reply = getChatResponse(input, activeSuggestion.category || '');
+        thinkBubble.className = 's5-bubble ai';
+        thinkBubble.innerHTML = `<div class="s5-bubble-from">MindCheck</div><div class="s5-bubble-text">${reply}</div>`;
+        area.scrollTop = area.scrollHeight;
+        document.getElementById('s5SendBtn').disabled = false;
+        document.getElementById('s5Input').focus();
+      }, 700 + Math.random() * 400);
     }
 
     function deleteSuggestion(idx) { savedSuggestions.splice(idx, 1); saveToCookie(savedSuggestions); renderSaved(); showToast('Suggestion removed.'); }
