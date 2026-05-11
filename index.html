@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MindCheck — AI Mental Health Support</title>
+  <title>MindCheck</title>
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
     rel="stylesheet">
@@ -30,14 +30,14 @@
       --red-border: #FECACA;
       --radius: 16px;
       --radius-sm: 10px;
-      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10);
+      --shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .06);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, .10);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
-      padding: 0;
+      padding: 0
     }
 
     body {
@@ -47,18 +47,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      padding: 24px 16px
     }
 
-    /* Phone shell */
     .shell {
       width: 390px;
       background: var(--surface);
       border-radius: 40px;
       border: 1.5px solid var(--border);
-      box-shadow: var(--shadow-lg), 0 0 0 8px rgba(0, 0, 0, 0.04);
+      box-shadow: var(--shadow-lg), 0 0 0 8px rgba(0, 0, 0, .04);
       overflow: hidden;
-      position: relative;
+      position: relative
     }
 
     .status-bar {
@@ -70,27 +69,25 @@
       font-size: 12px;
       font-weight: 500;
       color: var(--text-muted);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border)
     }
 
-    /* Screens */
     .screen {
       display: none;
       padding: 28px 24px 36px;
-      min-height: 600px;
+      min-height: 600px
     }
 
     .screen.active {
       display: flex;
-      flex-direction: column;
+      flex-direction: column
     }
 
-    /* ─── SCREEN 1: Check-in ─── */
     .app-brand {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 36px;
+      margin-bottom: 36px
     }
 
     .brand-icon {
@@ -100,24 +97,20 @@
       border-radius: 10px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: center
     }
 
     .brand-icon svg {
       width: 18px;
       height: 18px;
-      fill: white;
+      fill: white
     }
 
     .brand-name {
       font-size: 18px;
       font-weight: 600;
       color: var(--text);
-      letter-spacing: -0.3px;
-    }
-
-    .greeting-block {
-      margin-bottom: 28px;
+      letter-spacing: -.3px
     }
 
     .greeting-main {
@@ -126,13 +119,14 @@
       font-weight: 500;
       color: var(--text);
       line-height: 1.3;
-      margin-bottom: 8px;
+      margin-bottom: 8px
     }
 
     .greeting-sub {
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.5;
+      margin-bottom: 28px
     }
 
     .mood-textarea {
@@ -147,24 +141,57 @@
       color: var(--text);
       resize: none;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color .2s;
       line-height: 1.6;
-      margin-bottom: 8px;
+      margin-bottom: 8px
     }
 
     .mood-textarea::placeholder {
-      color: var(--text-light);
+      color: var(--text-light)
     }
 
     .mood-textarea:focus {
-      border-color: var(--blue);
+      border-color: var(--blue)
+    }
+
+    .mood-textarea.needs-more {
+      border-color: #F97316
     }
 
     .char-count {
       font-size: 12px;
       color: var(--text-light);
       text-align: right;
-      margin-bottom: 20px;
+      margin-bottom: 20px
+    }
+
+    .elaborate-prompt {
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      background: #FFF7ED;
+      border: 1.5px solid #FED7AA;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      animation: fadeIn .3s ease forwards
+    }
+
+    .elaborate-prompt.show {
+      display: flex
+    }
+
+    .elaborate-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #92400E;
+      margin-bottom: 3px
+    }
+
+    .elaborate-desc {
+      font-size: 12px;
+      color: #B45309;
+      line-height: 1.5
     }
 
     .privacy-note {
@@ -176,7 +203,7 @@
       padding: 10px 14px;
       margin-bottom: 24px;
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--text-muted)
     }
 
     .privacy-note svg {
@@ -184,7 +211,7 @@
       height: 14px;
       flex-shrink: 0;
       stroke: var(--text-muted);
-      fill: none;
+      fill: none
     }
 
     .btn-primary {
@@ -198,36 +225,29 @@
       font-size: 16px;
       font-weight: 500;
       cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      letter-spacing: -0.2px;
+      transition: background .15s, transform .1s
     }
 
     .btn-primary:hover {
-      background: #1D4ED8;
+      background: #1D4ED8
     }
 
     .btn-primary:active {
-      transform: scale(0.98);
+      transform: scale(.98)
     }
 
-    .btn-primary:disabled {
-      background: #93C5FD;
-      cursor: not-allowed;
-    }
-
-    /* ─── SCREEN 2: Loading ─── */
     .loading-screen {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 20px
     }
 
     .loading-dots {
       display: flex;
-      gap: 8px;
+      gap: 8px
     }
 
     .dot {
@@ -235,15 +255,15 @@
       height: 10px;
       background: var(--blue);
       border-radius: 50%;
-      animation: bounce 1.2s infinite;
+      animation: bounce 1.2s infinite
     }
 
     .dot:nth-child(2) {
-      animation-delay: 0.2s;
+      animation-delay: .2s
     }
 
     .dot:nth-child(3) {
-      animation-delay: 0.4s;
+      animation-delay: .4s
     }
 
     @keyframes bounce {
@@ -251,23 +271,22 @@
       0%,
       80%,
       100% {
-        transform: scale(0.6);
-        opacity: 0.4;
+        transform: scale(.6);
+        opacity: .4
       }
 
       40% {
         transform: scale(1);
-        opacity: 1;
+        opacity: 1
       }
     }
 
     .loading-text {
       font-size: 15px;
       color: var(--text-muted);
-      font-style: italic;
+      font-style: italic
     }
 
-    /* ─── SCREEN 3: Result ─── */
     .back-btn {
       display: flex;
       align-items: center;
@@ -280,18 +299,18 @@
       color: var(--text-muted);
       padding: 0;
       margin-bottom: 20px;
-      transition: color 0.15s;
+      transition: color .15s
     }
 
     .back-btn:hover {
-      color: var(--text);
+      color: var(--text)
     }
 
     .back-btn svg {
       width: 16px;
       height: 16px;
       stroke: currentColor;
-      fill: none;
+      fill: none
     }
 
     .you-shared {
@@ -301,12 +320,12 @@
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 20px;
-      line-height: 1.5;
+      line-height: 1.5
     }
 
     .you-shared span {
       color: var(--text);
-      font-weight: 500;
+      font-weight: 500
     }
 
     .suggestion-card {
@@ -315,8 +334,7 @@
       border-radius: var(--radius);
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: var(--shadow);
-      position: relative;
+      box-shadow: var(--shadow)
     }
 
     .suggestion-label {
@@ -324,8 +342,8 @@
       font-weight: 600;
       color: var(--text-light);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 10px;
+      letter-spacing: .8px;
+      margin-bottom: 10px
     }
 
     .suggestion-text {
@@ -333,14 +351,14 @@
       font-size: 16px;
       line-height: 1.65;
       color: var(--text);
-      margin-bottom: 18px;
+      margin-bottom: 18px
     }
 
     .confidence-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 10px
     }
 
     .badge {
@@ -351,43 +369,43 @@
       border-radius: 20px;
       font-size: 13px;
       font-weight: 600;
-      border: 1.5px solid;
+      border: 1.5px solid
     }
 
     .badge-dot {
       width: 7px;
       height: 7px;
-      border-radius: 50%;
+      border-radius: 50%
     }
 
     .badge.high {
       background: var(--green-light);
       color: var(--green);
-      border-color: var(--green-border);
+      border-color: var(--green-border)
     }
 
     .badge.high .badge-dot {
-      background: var(--green);
+      background: var(--green)
     }
 
     .badge.moderate {
       background: var(--amber-light);
       color: var(--amber);
-      border-color: var(--amber-border);
+      border-color: var(--amber-border)
     }
 
     .badge.moderate .badge-dot {
-      background: var(--amber);
+      background: var(--amber)
     }
 
     .badge.low {
       background: var(--red-light);
       color: var(--red);
-      border-color: var(--red-border);
+      border-color: var(--red-border)
     }
 
     .badge.low .badge-dot {
-      background: var(--red);
+      background: var(--red)
     }
 
     .help-btn {
@@ -403,12 +421,12 @@
       font-size: 12px;
       color: var(--text-muted);
       font-weight: 600;
-      transition: background 0.15s;
-      flex-shrink: 0;
+      transition: background .15s;
+      flex-shrink: 0
     }
 
     .help-btn:hover {
-      background: var(--border);
+      background: var(--border)
     }
 
     .reason-line {
@@ -416,14 +434,14 @@
       color: var(--text-muted);
       font-style: italic;
       padding-top: 10px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border)
     }
 
     .action-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 16px
     }
 
     .btn-outline {
@@ -436,13 +454,13 @@
       font-weight: 500;
       color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.15s;
-      text-align: center;
+      transition: all .15s;
+      text-align: center
     }
 
     .btn-outline:hover {
       border-color: var(--text-muted);
-      color: var(--text);
+      color: var(--text)
     }
 
     .btn-save {
@@ -455,12 +473,12 @@
       font-weight: 500;
       color: white;
       cursor: pointer;
-      transition: all 0.15s;
-      text-align: center;
+      transition: all .15s;
+      text-align: center
     }
 
     .btn-save:hover {
-      background: #1D4ED8;
+      background: #1D4ED8
     }
 
     .new-checkin-btn {
@@ -473,14 +491,13 @@
       cursor: pointer;
       padding: 8px;
       text-decoration: underline;
-      text-underline-offset: 3px;
+      text-underline-offset: 3px
     }
 
     .new-checkin-btn:hover {
-      color: var(--text);
+      color: var(--text)
     }
 
-    /* Toast */
     .toast {
       position: absolute;
       bottom: 24px;
@@ -497,14 +514,14 @@
       gap: 10px;
       transform: translateY(80px);
       opacity: 0;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all .3s cubic-bezier(.34, 1.56, .64, 1);
       z-index: 100;
-      pointer-events: none;
+      pointer-events: none
     }
 
     .toast.show {
       transform: translateY(0);
-      opacity: 1;
+      opacity: 1
     }
 
     .toast svg {
@@ -512,23 +529,22 @@
       height: 16px;
       stroke: #4ADE80;
       fill: none;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
-    /* ─── TOOLTIP OVERLAY ─── */
     .overlay {
       display: none;
       position: absolute;
       inset: 0;
-      background: rgba(28, 25, 23, 0.5);
+      background: rgba(28, 25, 23, .5);
       z-index: 50;
       align-items: flex-end;
       padding: 20px;
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px)
     }
 
     .overlay.show {
-      display: flex;
+      display: flex
     }
 
     .tooltip-sheet {
@@ -537,18 +553,18 @@
       padding: 24px;
       width: 100%;
       box-shadow: var(--shadow-lg);
-      animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: slideUp .25s cubic-bezier(.34, 1.56, .64, 1)
     }
 
     @keyframes slideUp {
       from {
         transform: translateY(20px);
-        opacity: 0;
+        opacity: 0
       }
 
       to {
         transform: translateY(0);
-        opacity: 1;
+        opacity: 1
       }
     }
 
@@ -557,14 +573,14 @@
       font-size: 18px;
       font-weight: 500;
       color: var(--text);
-      margin-bottom: 6px;
+      margin-bottom: 6px
     }
 
     .tooltip-sub {
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 20px;
-      line-height: 1.5;
+      line-height: 1.5
     }
 
     .confidence-level {
@@ -572,12 +588,12 @@
       gap: 12px;
       padding: 14px 0;
       border-bottom: 1px solid var(--border);
-      align-items: flex-start;
+      align-items: flex-start
     }
 
     .confidence-level:last-of-type {
       border-bottom: none;
-      margin-bottom: 16px;
+      margin-bottom: 16px
     }
 
     .level-dot {
@@ -585,61 +601,55 @@
       height: 10px;
       border-radius: 50%;
       margin-top: 4px;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .level-dot.green {
-      background: var(--green);
+      background: var(--green)
     }
 
     .level-dot.amber {
-      background: var(--amber);
+      background: var(--amber)
     }
 
     .level-dot.red {
-      background: var(--red);
+      background: var(--red)
     }
-
-    .level-info {}
 
     .level-name {
       font-size: 14px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 3px;
+      margin-bottom: 3px
     }
 
     .level-desc {
       font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.5
     }
 
     .tooltip-scroll-area {
       max-height: 220px;
       overflow-y: auto;
       margin-bottom: 14px;
-      scroll-behavior: smooth;
+      scroll-behavior: smooth
     }
 
     .tooltip-scroll-area::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    .tooltip-scroll-area::-webkit-scrollbar-track {
-      background: transparent;
+      width: 3px
     }
 
     .tooltip-scroll-area::-webkit-scrollbar-thumb {
       background: var(--border);
-      border-radius: 2px;
+      border-radius: 2px
     }
 
     .read-progress {
       display: flex;
       gap: 6px;
       margin-bottom: 14px;
-      align-items: center;
+      align-items: center
     }
 
     .read-pip {
@@ -647,11 +657,11 @@
       flex: 1;
       border-radius: 2px;
       background: var(--border);
-      transition: background 0.3s;
+      transition: background .3s
     }
 
     .read-pip.seen {
-      background: var(--blue);
+      background: var(--blue)
     }
 
     .read-hint {
@@ -659,12 +669,12 @@
       color: var(--text-light);
       text-align: center;
       margin-bottom: 10px;
-      transition: opacity 0.3s;
+      transition: opacity .3s
     }
 
     .read-hint.hidden {
       opacity: 0;
-      pointer-events: none;
+      pointer-events: none
     }
 
     .task2-success {
@@ -681,14 +691,14 @@
       margin-bottom: 12px;
       opacity: 0;
       transform: translateY(4px);
-      transition: all 0.3s ease;
-      pointer-events: none;
+      transition: all .3s ease;
+      pointer-events: none
     }
 
     .task2-success.show {
       opacity: 1;
       transform: translateY(0);
-      pointer-events: auto;
+      pointer-events: auto
     }
 
     .task2-success svg {
@@ -696,7 +706,7 @@
       height: 15px;
       stroke: var(--green);
       fill: none;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .btn-got-it {
@@ -710,32 +720,31 @@
       font-size: 15px;
       font-weight: 500;
       cursor: pointer;
-      transition: background 0.15s, opacity 0.2s;
+      transition: background .15s, opacity .2s
     }
 
     .btn-got-it:hover:not(:disabled) {
-      background: #1D4ED8;
+      background: #1D4ED8
     }
 
     .btn-got-it:disabled {
-      opacity: 0.4;
+      opacity: .4;
       cursor: not-allowed;
-      background: var(--blue);
+      background: var(--blue)
     }
 
-    /* ─── SCREEN 4: Saved ─── */
     .saved-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 24px
     }
 
     .saved-title {
       font-family: 'Lora', serif;
       font-size: 22px;
       font-weight: 500;
-      color: var(--text);
+      color: var(--text)
     }
 
     .saved-count {
@@ -744,14 +753,14 @@
       padding: 4px 12px;
       font-size: 13px;
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 500
     }
 
     .saved-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      flex: 1;
+      flex: 1
     }
 
     .saved-empty {
@@ -763,7 +772,7 @@
       gap: 12px;
       color: var(--text-light);
       text-align: center;
-      padding: 40px 0;
+      padding: 40px 0
     }
 
     .saved-empty svg {
@@ -771,15 +780,15 @@
       height: 40px;
       stroke: var(--text-light);
       fill: none;
-      opacity: 0.5;
+      opacity: .5
     }
 
     .saved-empty p {
-      font-size: 15px;
+      font-size: 15px
     }
 
     .saved-empty small {
-      font-size: 13px;
+      font-size: 13px
     }
 
     .saved-card {
@@ -787,7 +796,7 @@
       border: 1.5px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 16px;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow)
     }
 
     .saved-card-text {
@@ -798,18 +807,18 @@
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      overflow: hidden;
+      overflow: hidden
     }
 
     .saved-card-meta {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-between
     }
 
     .saved-card-date {
       font-size: 12px;
-      color: var(--text-light);
+      color: var(--text-light)
     }
 
     .btn-new {
@@ -824,91 +833,526 @@
       font-weight: 500;
       cursor: pointer;
       margin-top: 20px;
-      transition: background 0.15s;
+      transition: background .15s
     }
 
     .btn-new:hover {
-      background: #1D4ED8;
+      background: #1D4ED8
     }
 
-    .elaborate-prompt {
-      display: none;
-      align-items: flex-start;
-      gap: 10px;
-      background: #FFF7ED;
-      border: 1.5px solid #FED7AA;
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      margin-bottom: 16px;
-      animation: fadeIn 0.3s ease forwards;
-    }
-
-    .elaborate-prompt.show {
-      display: flex;
-    }
-
-    .elaborate-icon {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .elaborate-text {
-      flex: 1;
-    }
-
-    .elaborate-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #92400E;
-      margin-bottom: 3px;
-    }
-
-    .elaborate-desc {
-      font-size: 12px;
-      color: #B45309;
-      line-height: 1.5;
-    }
-
-    .mood-textarea.needs-more {
-      border-color: #F97316;
-    }
-
-    .mood-textarea.needs-more:focus {
-      border-color: #EA580C;
-    }
-
-    /* Fade-in animation */
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(8px)
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0)
       }
     }
 
     .fade-in {
-      animation: fadeIn 0.35s ease forwards;
+      animation: fadeIn .35s ease forwards
+    }
+
+    .detail-orig-query {
+      background: var(--blue-light);
+      border: 1px solid #BFDBFE;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #1E40AF;
+      line-height: 1.55;
+      margin-bottom: 16px
+    }
+
+    .detail-orig-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #3B82F6;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 5px
+    }
+
+    .chat-thread {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex: 1;
+      overflow-y: auto;
+      max-height: 260px;
+      padding-right: 2px
+    }
+
+    .chat-thread::-webkit-scrollbar {
+      width: 3px
+    }
+
+    .chat-thread::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px
+    }
+
+    .chat-bubble {
+      max-width: 88%;
+      padding: 11px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.6
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: var(--blue);
+      color: white;
+      border-bottom-right-radius: 4px
+    }
+
+    .chat-bubble.ai {
+      align-self: flex-start;
+      background: var(--surface2);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+      font-family: 'Lora', serif;
+      font-size: 14px
+    }
+
+    .chat-bubble.ai .bubble-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 5px
+    }
+
+    .chat-bubble.thinking {
+      font-style: italic;
+      color: var(--text-muted);
+      background: var(--surface2);
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end
+    }
+
+    .chat-textarea {
+      flex: 1;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      resize: none;
+      outline: none;
+      transition: border-color .2s;
+      line-height: 1.5;
+      min-height: 42px;
+      max-height: 100px
+    }
+
+    .chat-textarea::placeholder {
+      color: var(--text-light)
+    }
+
+    .chat-textarea:focus {
+      border-color: var(--blue)
+    }
+
+    .chat-send-btn {
+      width: 42px;
+      height: 42px;
+      background: var(--blue);
+      border: none;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .15s
+    }
+
+    .chat-send-btn:hover {
+      background: #1D4ED8
+    }
+
+    .chat-send-btn:disabled {
+      background: #93C5FD;
+      cursor: not-allowed
+    }
+
+    .chat-send-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: white;
+      fill: none
+    }
+
+    /* ── SCREEN 5 REDESIGN ── */
+    #screen5 {
+      padding: 0;
+      display: none;
+      flex-direction: column
+    }
+
+    #screen5.active {
+      display: flex
+    }
+
+    .s5-header {
+      padding: 16px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .s5-back {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      transition: color .15s;
+      flex-shrink: 0
+    }
+
+    .s5-back:hover {
+      color: var(--text)
+    }
+
+    .s5-back svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none
+    }
+
+    .s5-header-info {
+      flex: 1;
+      min-width: 0
+    }
+
+    .s5-header-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .s5-header-sub {
+      font-size: 12px;
+      color: var(--text-muted)
+    }
+
+    .s5-context {
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+      overflow: hidden;
+      transition: max-height .35s cubic-bezier(.4, 0, .2, 1), opacity .3s ease
+    }
+
+    .s5-context.collapsed {
+      max-height: 0;
+      opacity: 0
+    }
+
+    .s5-context.expanded {
+      max-height: 300px;
+      opacity: 1
+    }
+
+    .s5-context-inner {
+      padding: 14px 20px 16px
+    }
+
+    .s5-ctx-block {
+      margin-bottom: 12px
+    }
+
+    .s5-ctx-block:last-child {
+      margin-bottom: 0
+    }
+
+    .s5-ctx-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 5px
+    }
+
+    .s5-ctx-query {
+      font-size: 13px;
+      color: var(--blue);
+      background: var(--blue-light);
+      border-radius: 8px;
+      padding: 8px 12px;
+      line-height: 1.5;
+      font-weight: 500
+    }
+
+    .s5-ctx-suggestion {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden
+    }
+
+    .s5-ctx-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px
+    }
+
+    .s5-toggle-bar {
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+      transition: background .15s
+    }
+
+    .s5-toggle-bar:hover {
+      background: var(--surface2)
+    }
+
+    .s5-toggle-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted)
+    }
+
+    .s5-toggle-icon {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-muted);
+      fill: none;
+      transition: transform .3s
+    }
+
+    .s5-toggle-icon.up {
+      transform: rotate(180deg)
+    }
+
+    .s5-chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth
+    }
+
+    .s5-chat-area::-webkit-scrollbar {
+      width: 3px
+    }
+
+    .s5-chat-area::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px
+    }
+
+    .s5-empty-chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text-light);
+      text-align: center;
+      padding: 24px 0
+    }
+
+    .s5-empty-chat svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--text-light);
+      fill: none;
+      opacity: .5
+    }
+
+    .s5-empty-chat p {
+      font-size: 14px;
+      color: var(--text-muted)
+    }
+
+    .s5-empty-chat small {
+      font-size: 12px
+    }
+
+    .s5-bubble {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      animation: bubbleIn .25s cubic-bezier(.34, 1.3, .64, 1) forwards
+    }
+
+    @keyframes bubbleIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(.97)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .s5-bubble.user {
+      align-self: flex-end;
+      background: var(--blue);
+      color: white;
+      border-bottom-right-radius: 4px
+    }
+
+    .s5-bubble.ai {
+      align-self: flex-start;
+      background: var(--surface2);
+      color: var(--text);
+      border-bottom-left-radius: 4px
+    }
+
+    .s5-bubble.ai .s5-bubble-from {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 4px
+    }
+
+    .s5-bubble.ai .s5-bubble-text {
+      font-family: 'Lora', serif
+    }
+
+    .s5-bubble.thinking .s5-bubble-text {
+      font-style: italic;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .s5-input-bar {
+      padding: 12px 16px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0
+    }
+
+    .s5-input-inner {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 8px 8px 8px 14px;
+      transition: border-color .2s
+    }
+
+    .s5-input-inner:focus-within {
+      border-color: var(--blue)
+    }
+
+    .s5-input-ta {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      resize: none;
+      line-height: 1.5;
+      min-height: 22px;
+      max-height: 90px;
+      padding: 0
+    }
+
+    .s5-input-ta::placeholder {
+      color: var(--text-light)
+    }
+
+    .s5-send {
+      width: 34px;
+      height: 34px;
+      background: var(--blue);
+      border: none;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .15s, transform .1s
+    }
+
+    .s5-send:hover {
+      background: #1D4ED8
+    }
+
+    .s5-send:active {
+      transform: scale(.93)
+    }
+
+    .s5-send:disabled {
+      background: #93C5FD;
+      cursor: not-allowed
+    }
+
+    .s5-send svg {
+      width: 15px;
+      height: 15px;
+      stroke: white;
+      fill: none
     }
   </style>
 </head>
 
 <body>
-
   <div class="shell" id="shell">
-    <!-- Status bar -->
     <div class="status-bar">
       <span id="statusTime">9:41</span>
       <span>MindCheck</span>
       <span>●●●</span>
     </div>
 
-    <!-- SCREEN 1: Check-in -->
+    <!-- SCREEN 1 -->
     <div class="screen active" id="screen1">
       <div class="app-brand">
         <div class="brand-icon">
@@ -919,31 +1363,25 @@
         </div>
         <span class="brand-name">MindCheck</span>
       </div>
-
-      <div class="greeting-block">
-        <div class="greeting-main">Hi, how are you feeling today?</div>
-        <div class="greeting-sub">Share what's on your mind — the AI will suggest something helpful.</div>
-      </div>
-
+      <div class="greeting-main">Hi, how are you feeling today?</div>
+      <div class="greeting-sub">Share what's on your mind — the AI will suggest something helpful.</div>
       <textarea class="mood-textarea" id="moodInput"
         placeholder="Describe what's on your mind... (e.g. 'I've been really anxious about my exams and can't sleep')"
-        maxlength="500" oninput="updateChar(); clearElaborate()"></textarea>
+        maxlength="500" oninput="updateChar();clearElaborate()"></textarea>
       <div class="char-count"><span id="charCount">0</span> / 500</div>
-
       <div class="elaborate-prompt" id="elaboratePrompt">
-        <svg class="elaborate-icon" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2">
+        <svg style="width:18px;height:18px;flex-shrink:0;margin-top:1px" viewBox="0 0 24 24" fill="none"
+          stroke="#F97316" stroke-width="2">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="8" x2="12" y2="12" />
           <line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
-        <div class="elaborate-text">
+        <div>
           <div class="elaborate-title">Could you tell us a bit more?</div>
           <div class="elaborate-desc">A few more words help the AI understand your situation better and give you a more
-            relevant suggestion. Try describing what's causing this feeling, when it started, or how it's affecting your
-            day.</div>
+            relevant suggestion.</div>
         </div>
       </div>
-
       <div class="privacy-note">
         <svg viewBox="0 0 24 24" stroke-width="2">
           <rect x="3" y="11" width="18" height="11" rx="2" />
@@ -951,11 +1389,10 @@
         </svg>
         No account needed. Your input is not stored or shared.
       </div>
-
-      <button class="btn-primary" id="submitBtn" onclick="submitCheckin()">Get Support</button>
+      <button class="btn-primary" onclick="submitCheckin()">Get Support</button>
     </div>
 
-    <!-- SCREEN 2: Loading -->
+    <!-- SCREEN 2 -->
     <div class="screen" id="screen2">
       <div class="loading-screen">
         <div class="loading-dots">
@@ -967,7 +1404,7 @@
       </div>
     </div>
 
-    <!-- SCREEN 3: Result -->
+    <!-- SCREEN 3 -->
     <div class="screen" id="screen3">
       <button class="back-btn" onclick="goToScreen(1)">
         <svg viewBox="0 0 24 24" stroke-width="2">
@@ -975,24 +1412,17 @@
         </svg>
         New check-in
       </button>
-
-      <div class="you-shared" id="sharedSummary">
-        You mentioned: <span id="sharedText">feeling overwhelmed</span>
-      </div>
-
+      <div class="you-shared">You mentioned: <span id="sharedText">feeling overwhelmed</span></div>
       <div class="suggestion-card fade-in">
         <div class="suggestion-label">AI Suggestion</div>
         <div class="suggestion-text" id="suggestionText">Loading suggestion…</div>
         <div class="confidence-row">
-          <div class="badge" id="confidenceBadge">
-            <span class="badge-dot"></span>
-            <span id="confidenceLabel">High Confidence</span>
-          </div>
+          <div class="badge" id="confidenceBadge"><span class="badge-dot"></span><span id="confidenceLabel">High
+              Confidence</span></div>
           <button class="help-btn" onclick="showTooltip()">?</button>
         </div>
         <div class="reason-line" id="reasonLine">Based on: your check-in</div>
       </div>
-
       <div class="action-row">
         <button class="btn-outline" onclick="dismissSuggestion()">Not relevant</button>
         <button class="btn-save" onclick="saveSuggestion()">This helps — save it</button>
@@ -1000,7 +1430,7 @@
       <button class="new-checkin-btn" onclick="goToScreen(1)">Start a new check-in</button>
     </div>
 
-    <!-- SCREEN 4: Saved -->
+    <!-- SCREEN 4 -->
     <div class="screen" id="screen4">
       <div class="saved-header">
         <div class="saved-title">Saved Suggestions</div>
@@ -1024,494 +1454,348 @@
       </button>
     </div>
 
-    <!-- Toast notification -->
+    <!-- SCREEN 5: Saved Detail + Chat -->
+    <div class="screen" id="screen5">
+      <!-- Fixed header -->
+      <div class="s5-header">
+        <button class="s5-back" onclick="goToScreen(4)">
+          <svg viewBox="0 0 24 24" stroke-width="2.5">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div class="s5-header-info">
+          <div class="s5-header-title" id="s5HeaderTitle">Your check-in</div>
+          <div class="s5-header-sub" id="s5HeaderSub">Saved suggestion</div>
+        </div>
+        <div class="badge" id="s5HeaderBadge" style="font-size:11px;padding:3px 10px;flex-shrink:0"><span
+            class="badge-dot"></span><span id="s5HeaderBadgeLabel"></span></div>
+      </div>
+
+      <!-- Collapsible context -->
+      <div class="s5-context expanded" id="s5Context">
+        <div class="s5-context-inner">
+          <div class="s5-ctx-block">
+            <div class="s5-ctx-label">Your check-in</div>
+            <div class="s5-ctx-query" id="s5CtxQuery"></div>
+          </div>
+          <div class="s5-ctx-block">
+            <div class="s5-ctx-label">AI Suggestion</div>
+            <div class="s5-ctx-suggestion" id="s5CtxSuggestion"></div>
+            <div class="s5-ctx-badge-row">
+              <div class="badge" id="s5CtxBadge" style="font-size:11px;padding:3px 10px"><span
+                  class="badge-dot"></span><span id="s5CtxBadgeLabel"></span></div>
+              <span style="font-size:12px;color:var(--text-light);font-style:italic" id="s5CtxReason"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toggle bar -->
+      <div class="s5-toggle-bar" id="s5ToggleBar" onclick="toggleContext()">
+        <span class="s5-toggle-label" id="s5ToggleLabel">Hide context</span>
+        <svg class="s5-toggle-icon up" id="s5ToggleIcon" viewBox="0 0 24 24" stroke-width="2">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </div>
+
+      <!-- Chat area -->
+      <div class="s5-chat-area" id="s5ChatArea">
+        <div class="s5-empty-chat" id="s5EmptyChat">
+          <svg viewBox="0 0 24 24" stroke-width="1.5">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          <p>Continue the conversation</p>
+          <small>Ask a follow-up or share how you're feeling now</small>
+        </div>
+      </div>
+
+      <!-- Input bar -->
+      <div class="s5-input-bar">
+        <div class="s5-input-inner">
+          <textarea class="s5-input-ta" id="s5Input" placeholder="Ask a follow-up or share more…" rows="1"
+            onkeydown="s5Keydown(event)" oninput="s5Resize(this)"></textarea>
+          <button class="s5-send" id="s5SendBtn" onclick="s5Send()">
+            <svg viewBox="0 0 24 24" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="toast" id="toast">
       <svg viewBox="0 0 24 24" stroke-width="2.5">
         <polyline points="20 6 9 17 4 12" />
       </svg>
-      <span id="toastMsg">Saved to your list!</span>
+      <span id="toastMsg">Saved!</span>
     </div>
 
-    <!-- Tooltip overlay -->
     <div class="overlay" id="tooltipOverlay" onclick="hideTooltip(event)">
       <div class="tooltip-sheet" onclick="event.stopPropagation()">
         <div class="tooltip-title">What does confidence mean?</div>
-        <div class="tooltip-sub">The AI analyses your input and shows how certain it is about the suggestion. This helps
-          you decide how much weight to give it.</div>
-
+        <div class="tooltip-sub">The AI analyses your input and shows how certain it is about the suggestion.</div>
         <div class="read-progress">
           <div class="read-pip" id="pip1"></div>
           <div class="read-pip" id="pip2"></div>
           <div class="read-pip" id="pip3"></div>
         </div>
-
         <div class="tooltip-scroll-area" id="tooltipScroll">
-          <div class="confidence-level" data-level="1" id="level1">
+          <div class="confidence-level" id="level1">
             <div class="level-dot green"></div>
-            <div class="level-info">
+            <div>
               <div class="level-name">High Confidence</div>
               <div class="level-desc">The AI found clear patterns in your input that match known coping strategies. This
                 suggestion is well-suited to what you described.</div>
             </div>
           </div>
-          <div class="confidence-level" data-level="2" id="level2">
+          <div class="confidence-level" id="level2">
             <div class="level-dot amber"></div>
-            <div class="level-info">
+            <div>
               <div class="level-name">Moderate Confidence</div>
               <div class="level-desc">Your input had mixed signals — this suggestion may be relevant but use your own
                 judgment to decide if it fits your situation.</div>
             </div>
           </div>
-          <div class="confidence-level" data-level="3" id="level3">
+          <div class="confidence-level" id="level3">
             <div class="level-dot red"></div>
-            <div class="level-info">
+            <div>
               <div class="level-name">Low Confidence</div>
               <div class="level-desc">The AI had limited information to go on. This suggestion is a starting point, not
                 a prescription. Trust your own instincts here.</div>
             </div>
           </div>
         </div>
-
         <div class="read-hint" id="readHint">Scroll to read all three levels</div>
-
         <div class="task2-success" id="task2Success">
           <svg viewBox="0 0 24 24" stroke-width="2.5">
             <polyline points="20 6 9 17 4 12" />
           </svg>
           You've reviewed all confidence levels
         </div>
-
         <button class="btn-got-it" id="gotItBtn" onclick="completeTask2()" disabled>Got it</button>
       </div>
     </div>
   </div>
 
   <script>
-    // ─── RESPONSE ENGINE ───────────────────────────────────────────────
-    // Built from UIU survey findings (n=34). Categories match the top
-    // stressors reported: academic stress (47%), anxiety/overwhelm (44%),
-    // loneliness (65%), sleep (reported), motivation/mood (82%),
-    // future/career worry, and mixed/unclear inputs.
-    // Confidence levels follow Q16 preference: colour indicator (32% top choice).
-    // Each category has 3 rotating responses so repeat users see variety.
-    // ───────────────────────────────────────────────────────────────────
-
-    const CRISIS_KEYWORDS = [
-      'suicide', 'kill myself', 'want to die', 'end my life', 'hopeless',
-      'can\'t go on', 'no point', 'give up on life', 'self harm', 'hurt myself'
-    ];
-
+    const CRISIS_KEYWORDS = ['suicide', 'kill myself', 'want to die', 'end my life', 'hopeless', 'can\'t go on', 'no point', 'give up on life', 'self harm', 'hurt myself'];
     const CATEGORIES = [
-      {
-        name: 'academic_stress',
-        summary: 'feeling stressed about academics',
-        keywords: ['exam', 'exams', 'test', 'assignment', 'deadline', 'submit',
-          'cgpa', 'grade', 'marks', 'study', 'studying', 'lecture', 'class',
-          'project', 'thesis', 'result', 'fail', 'failing', 'academic', 'semester'],
-        confidence: 'high',
-        reason: 'Based on: clear academic stressor identified in your check-in',
-        responses: [
-          "Academic pressure is one of the most common challenges students face — you're not alone in this. Try breaking your workload into a list of small, specific tasks and focus on completing just one thing today. Even finishing one small item can help shift the feeling of being stuck.",
-          "When deadlines pile up, everything feels urgent at once. Take 10 minutes to write down everything on your mind, then circle the single most important task. Give that one thing your full attention for 25 minutes, then take a short break — this structured approach can make the workload feel more manageable.",
-          "Exam stress is real and it's okay to feel it. Rather than studying for hours straight, try shorter focused sessions of 30-45 minutes with 10-minute breaks. Also make sure you're getting at least one proper meal — your brain needs fuel to retain information effectively."
-        ]
-      },
-      {
-        name: 'overwhelm',
-        summary: 'feeling overwhelmed with everything',
-        keywords: ['overwhelm', 'overwhelmed', 'too much', 'everything', 'can\'t handle',
-          'pressure', 'burden', 'heavy', 'exhausted', 'burnout', 'burnt out',
-          'stressed', 'stress', 'anxious', 'anxiety', 'panic', 'worried', 'worry'],
-        confidence: 'high',
-        reason: 'Based on: overwhelm and anxiety patterns identified in your check-in',
-        responses: [
-          "Feeling overwhelmed often means your brain is trying to hold too many things at once. Try a simple brain dump — write everything that's worrying you onto paper without filtering. Once it's out of your head and visible, it becomes easier to figure out what actually needs your attention today versus what can wait.",
-          "When everything feels like too much, it usually means you need a reset before you can move forward. Step away for 10-15 minutes — go outside, drink water, breathe slowly. This isn't procrastination; it's giving your nervous system a chance to calm down so you can think clearly again.",
-          "Anxiety and overwhelm are signals, not weaknesses. Try the 5-4-3-2-1 grounding technique: notice 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste. It sounds simple but it genuinely helps interrupt the spiral and bring you back to the present moment."
-        ]
-      },
-      {
-        name: 'loneliness',
-        summary: 'feeling lonely or disconnected',
-        keywords: ['lonely', 'loneliness', 'alone', 'isolated', 'no one', 'nobody',
-          'no friends', 'disconnected', 'left out', 'excluded', 'miss', 'missing',
-          'far from family', 'homesick', 'no one understands'],
-        confidence: 'high',
-        reason: 'Based on: loneliness and social isolation mentioned in your check-in',
-        responses: [
-          "Feeling lonely at university is more common than it looks from the outside — 65% of students in a recent survey said they felt isolated at least sometimes. One small step is reaching out to one person today, even just a message. Connection doesn't have to be deep to matter; even a brief exchange can help lift the feeling.",
-          "Loneliness can feel very heavy, especially when surrounded by people who seem to have everything figured out. Consider joining one campus activity — not to make best friends immediately, but just to be around people with a shared interest. Belonging grows slowly through repeated small interactions.",
-          "It's okay to miss home and feel out of place — that's a very human response to big life transitions. Try scheduling a regular call with someone from home, and separately, identify one person at university you could check in with this week. Building connection takes time, and small consistent efforts matter more than big gestures."
-        ]
-      },
-      {
-        name: 'sleep',
-        summary: 'struggling with sleep',
-        keywords: ['sleep', 'sleeping', 'can\'t sleep', 'insomnia', 'tired', 'exhausted',
-          'fatigue', 'up all night', 'awake', 'rest', 'restless', 'nighttime',
-          'staying up', 'late night', 'waking up'],
-        confidence: 'high',
-        reason: 'Based on: sleep difficulty clearly described in your check-in',
-        responses: [
-          "Poor sleep affects everything — your concentration, mood, and ability to cope with stress all suffer when you're not resting properly. Try keeping your phone out of reach 30 minutes before bed and doing something low-stimulation instead, like reading or light stretching. Even one better night can noticeably shift how you feel the next day.",
-          "When your mind won't switch off at night, it's often because you haven't had a chance to process the day. Try writing 3 things that are on your mind before bed, then close the notebook — this signals to your brain that those thoughts have been 'filed' and don't need to keep circling. A consistent sleep time also helps more than most people expect.",
-          "Exhaustion from poor sleep makes everything harder to manage. During the day, try to get at least 15-20 minutes of natural light — it helps regulate your sleep cycle. Avoid caffeine after 3pm and keep your study space separate from where you sleep if possible, so your brain learns to associate your bed with rest."
-        ]
-      },
-      {
-        name: 'motivation',
-        summary: 'struggling with motivation and low mood',
-        keywords: ['motivation', 'motivated', 'unmotivated', 'no motivation', 'lazy',
-          'can\'t focus', 'focus', 'concentrate', 'concentration', 'mood', 'low mood',
-          'sad', 'unhappy', 'depressed', 'depression', 'empty', 'numb', 'meaningless',
-          'pointless', 'don\'t care', 'lost interest', 'nothing matters'],
-        confidence: 'moderate',
-        reason: 'Based on: low mood and motivation patterns in your check-in',
-        responses: [
-          "Low motivation is often your mind and body asking for a rest you haven't given yourself. Before trying to push through, ask yourself honestly: when did you last do something just for enjoyment? Even 20 minutes of an activity you like — not study, not productive — can help restore the mental energy needed to get going again.",
-          "When you can't focus or feel unmotivated, starting is usually the hardest part. Try the 2-minute rule: commit to working on something for just 2 minutes. You're allowed to stop after that. Most of the time, starting is enough to build momentum. If you truly stop after 2 minutes, that's okay too — rest is not failure.",
-          "Persistent low mood can make everything feel heavier than it is. Try keeping a simple daily note of one small thing that went okay — it doesn't have to be positive, just neutral. Over time this helps your brain notice that not every moment is difficult, even when things feel stuck."
-        ]
-      },
-      {
-        name: 'future_career',
-        summary: 'worried about future and career',
-        keywords: ['future', 'career', 'job', 'employment', 'after graduation', 'graduate',
-          'graduation', 'uncertain', 'uncertainty', 'don\'t know what', 'lost',
-          'direction', 'purpose', 'what to do', 'confused about', 'plan', 'scared about future'],
-        confidence: 'high',
-        reason: 'Based on: future and career uncertainty identified in your check-in',
-        responses: [
-          "Uncertainty about the future is one of the most common anxieties among final-year students — you're not behind, and not knowing exactly what comes next is normal at this stage. Try separating what you can control (your skills, your next small step) from what you can't (the job market, timing). Focus your energy only on the first category.",
-          "Career anxiety often comes from comparing your internal uncertainty to other people's external confidence. Most people are figuring it out as they go. A useful exercise is to write down 3 things you're genuinely good at and 2 areas you'd like to grow in — this gives you something concrete to work with instead of a vague feeling of being unprepared.",
-          "Feeling lost about your future doesn't mean you're behind — it means you're at a transition point that requires thought. Try talking to one person whose career path you find interesting, not to copy them but just to hear how they navigated uncertainty. Other people's honest stories are often more reassuring than any advice."
-        ]
-      },
-      {
-        name: 'mixed',
-        summary: 'dealing with mixed feelings',
-        keywords: [],
-        confidence: 'moderate',
-        reason: 'Based on: multiple mixed concerns detected in your check-in',
-        responses: [
-          "It sounds like several things are weighing on you at once. When everything blurs together, it helps to slow down and ask: what is the one feeling that's strongest right now? Naming it — even just to yourself — can reduce its grip. You don't have to solve everything today; just acknowledging what you're carrying is a meaningful first step.",
-          "Mixed feelings are hard to untangle when you're inside them. Try writing freely for 5 minutes without editing — just let whatever is on your mind come out. You don't have to share it or act on it. Sometimes getting thoughts out of your head and onto paper creates enough distance to see things a little more clearly.",
-          "It's okay not to have a clear label for what you're feeling. You don't need to diagnose yourself to take care of yourself. Today, try doing one small kind thing for your body — drink water, eat something, step outside briefly. Physical care and emotional care are more connected than they seem."
-        ]
-      }
+      { name: 'academic_stress', summary: 'feeling stressed about academics', keywords: ['exam', 'exams', 'test', 'assignment', 'deadline', 'submit', 'cgpa', 'grade', 'marks', 'study', 'studying', 'lecture', 'class', 'project', 'thesis', 'result', 'fail', 'failing', 'academic', 'semester'], confidence: 'high', reason: 'Based on: clear academic stressor identified in your check-in', responses: ["Academic pressure is one of the most common challenges students face — you're not alone in this. Try breaking your workload into a list of small, specific tasks and focus on completing just one thing today. Even finishing one small item can help shift the feeling of being stuck.", "When deadlines pile up, everything feels urgent at once. Take 10 minutes to write down everything on your mind, then circle the single most important task. Give that one thing your full attention for 25 minutes, then take a short break.", "Exam stress is real and it's okay to feel it. Rather than studying for hours straight, try shorter focused sessions of 30–45 minutes with 10-minute breaks. Also make sure you're getting at least one proper meal — your brain needs fuel to retain information effectively."] },
+      { name: 'overwhelm', summary: 'feeling overwhelmed with everything', keywords: ['overwhelm', 'overwhelmed', 'too much', 'everything', 'can\'t handle', 'pressure', 'burden', 'heavy', 'exhausted', 'burnout', 'burnt out', 'stressed', 'stress', 'anxious', 'anxiety', 'panic', 'worried', 'worry'], confidence: 'high', reason: 'Based on: overwhelm and anxiety patterns identified in your check-in', responses: ["Feeling overwhelmed often means your brain is trying to hold too many things at once. Try a simple brain dump — write everything that's worrying you onto paper without filtering. Once it's out of your head and visible, it becomes easier to figure out what actually needs your attention today.", "When everything feels like too much, it usually means you need a reset before you can move forward. Step away for 10–15 minutes — go outside, drink water, breathe slowly. This isn't procrastination; it's giving your nervous system a chance to calm down.", "Anxiety and overwhelm are signals, not weaknesses. Try the 5-4-3-2-1 grounding technique: notice 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste. It genuinely helps interrupt the spiral and bring you back to the present moment."] },
+      { name: 'loneliness', summary: 'feeling lonely or disconnected', keywords: ['lonely', 'loneliness', 'alone', 'isolated', 'no one', 'nobody', 'no friends', 'disconnected', 'left out', 'excluded', 'miss', 'missing', 'far from family', 'homesick', 'no one understands'], confidence: 'high', reason: 'Based on: loneliness and social isolation mentioned in your check-in', responses: ["Feeling lonely at university is more common than it looks from the outside — 65% of students in a recent survey said they felt isolated at least sometimes. One small step is reaching out to one person today, even just a message. Connection doesn't have to be deep to matter.", "Loneliness can feel very heavy, especially when surrounded by people who seem to have everything figured out. Consider joining one campus activity — not to make best friends immediately, but just to be around people with a shared interest.", "It's okay to miss home and feel out of place — that's a very human response to big life transitions. Try scheduling a regular call with someone from home, and separately, identify one person at university you could check in with this week."] },
+      { name: 'sleep', summary: 'struggling with sleep', keywords: ['sleep', 'sleeping', 'can\'t sleep', 'insomnia', 'tired', 'exhausted', 'fatigue', 'up all night', 'awake', 'rest', 'restless', 'nighttime', 'staying up', 'late night', 'waking up'], confidence: 'high', reason: 'Based on: sleep difficulty clearly described in your check-in', responses: ["Poor sleep affects everything — your concentration, mood, and ability to cope with stress all suffer when you're not resting properly. Try keeping your phone out of reach 30 minutes before bed and doing something low-stimulation instead, like reading or light stretching.", "When your mind won't switch off at night, it's often because you haven't had a chance to process the day. Try writing 3 things that are on your mind before bed, then close the notebook — this signals to your brain that those thoughts have been 'filed'.", "Exhaustion from poor sleep makes everything harder to manage. During the day, try to get at least 15–20 minutes of natural light — it helps regulate your sleep cycle. Avoid caffeine after 3pm if possible."] },
+      { name: 'motivation', summary: 'struggling with motivation and low mood', keywords: ['motivation', 'motivated', 'unmotivated', 'no motivation', 'lazy', 'can\'t focus', 'focus', 'concentrate', 'mood', 'low mood', 'sad', 'unhappy', 'depressed', 'depression', 'empty', 'numb', 'meaningless', 'pointless', 'don\'t care', 'lost interest', 'nothing matters'], confidence: 'moderate', reason: 'Based on: low mood and motivation patterns in your check-in', responses: ["Low motivation is often your mind and body asking for a rest you haven't given yourself. Before trying to push through, ask yourself honestly: when did you last do something just for enjoyment? Even 20 minutes of an activity you like can help restore mental energy.", "When you can't focus or feel unmotivated, starting is usually the hardest part. Try the 2-minute rule: commit to working on something for just 2 minutes. Most of the time, starting is enough to build momentum.", "Persistent low mood can make everything feel heavier than it is. Try keeping a simple daily note of one small thing that went okay — it doesn't have to be positive, just neutral. Over time this helps your brain notice that not every moment is difficult."] },
+      { name: 'future_career', summary: 'worried about future and career', keywords: ['future', 'career', 'job', 'employment', 'after graduation', 'graduate', 'graduation', 'uncertain', 'uncertainty', 'don\'t know what', 'lost', 'direction', 'purpose', 'what to do', 'confused about', 'plan', 'scared about future'], confidence: 'high', reason: 'Based on: future and career uncertainty identified in your check-in', responses: ["Uncertainty about the future is one of the most common anxieties among final-year students — you're not behind, and not knowing exactly what comes next is normal at this stage. Try separating what you can control from what you can't. Focus your energy only on the first category.", "Career anxiety often comes from comparing your internal uncertainty to other people's external confidence. Most people are figuring it out as they go. Write down 3 things you're genuinely good at and 2 areas you'd like to grow in.", "Feeling lost about your future doesn't mean you're behind — it means you're at a transition point that requires thought. Try talking to one person whose career path you find interesting, not to copy them but just to hear how they navigated uncertainty."] },
+      { name: 'mixed', summary: 'dealing with mixed feelings', keywords: [], confidence: 'moderate', reason: 'Based on: multiple mixed concerns detected in your check-in', responses: ["It sounds like several things are weighing on you at once. When everything blurs together, it helps to slow down and ask: what is the one feeling that's strongest right now? Naming it — even just to yourself — can reduce its grip.", "Mixed feelings are hard to untangle when you're inside them. Try writing freely for 5 minutes without editing — just let whatever is on your mind come out. Sometimes getting thoughts out of your head and onto paper creates enough distance to see things a little more clearly.", "It's okay not to have a clear label for what you're feeling. Today, try doing one small kind thing for your body — drink water, eat something, step outside briefly. Physical care and emotional care are more connected than they seem."] }
     ];
-
-    // Low confidence fallback — for very short or unrecognisable inputs
-    const LOW_CONFIDENCE_RESPONSES = [
-      {
-        text: "Your message was quite brief, so this suggestion is general rather than specific to your situation. When you're not sure what you're feeling, sometimes the most useful thing is simply to pause and check in with yourself: are you hungry, tired, or disconnected from others? Meeting a basic need is often the first step.",
-        reason: "Based on: limited information — input was too brief to identify a specific concern",
-        summary: "sharing something brief"
-      },
-      {
-        text: "It's hard to know exactly what you're going through from a short message, so take this suggestion with that in mind. Consider writing a few more lines about what's on your mind — sometimes the act of putting it into words is itself helpful, and it gives you a clearer picture of what kind of support you actually need.",
-        reason: "Based on: unclear input — the AI could not identify a specific stressor",
-        summary: "expressing something hard to describe"
-      }
-    ];
-
-    // ─── Rotation counter so repeat inputs get different responses ───
+    const LOW_CONFIDENCE_RESPONSES = [{ text: "Your message was quite brief, so this suggestion is general rather than specific to your situation. When you're not sure what you're feeling, sometimes the most useful thing is simply to pause and check in with yourself: are you hungry, tired, or disconnected from others? Meeting a basic need is often the first step.", reason: "Based on: limited information — input was too brief to identify a specific concern", summary: "sharing something brief" }, { text: "It's hard to know exactly what you're going through from a short message, so take this suggestion with that in mind. Consider writing a few more lines about what's on your mind — sometimes the act of putting it into words is itself helpful, and it gives you a clearer picture of what kind of support you actually need.", reason: "Based on: unclear input — the AI could not identify a specific stressor", summary: "expressing something hard to describe" }];
     const rotationCounters = {};
+    function getRotatedResponse(name, responses) { if (!rotationCounters[name]) rotationCounters[name] = 0; const idx = rotationCounters[name] % responses.length; rotationCounters[name]++; return responses[idx]; }
 
-    function getRotatedResponse(categoryName, responses) {
-      if (!rotationCounters[categoryName]) rotationCounters[categoryName] = 0;
-      const idx = rotationCounters[categoryName] % responses.length;
-      rotationCounters[categoryName]++;
-      return responses[idx];
+    /* ── COOKIE PERSISTENCE ── */
+    const COOKIE_KEY = 'mindcheck_saved';
+    const COOKIE_DAYS = 365;
+    function saveToCookie(arr) {
+      const expires = new Date(Date.now() + COOKIE_DAYS * 864e5).toUTCString();
+      try { document.cookie = COOKIE_KEY + '=' + encodeURIComponent(JSON.stringify(arr)) + ';expires=' + expires + ';path=/;SameSite=Lax'; } catch (e) { }
     }
-
+    function loadFromCookie() {
+      try {
+        const match = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith(COOKIE_KEY + '='));
+        if (!match) return [];
+        return JSON.parse(decodeURIComponent(match.split('=').slice(1).join(''))) || [];
+      } catch (e) { return []; }
+    }
     function analyseInput(input) {
       const lower = input.toLowerCase();
-
-      // Crisis detection — always check first
-      const isCrisis = CRISIS_KEYWORDS.some(kw => lower.includes(kw));
-      if (isCrisis) return { crisis: true };
-
-      // Too short — low confidence
+      if (CRISIS_KEYWORDS.some(kw => lower.includes(kw))) return { crisis: true };
       const wordCount = input.trim().split(/\s+/).length;
-      if (wordCount < 4) {
-        const r = LOW_CONFIDENCE_RESPONSES[rotationCounters['low'] % 2 || 0];
-        rotationCounters['low'] = (rotationCounters['low'] || 0) + 1;
-        return {
-          text: r.text,
-          confidence: 'low',
-          reason: r.reason,
-          summary: r.summary
-        };
-      }
-
-      // Score each category by keyword matches
-      let bestCategory = null;
-      let bestScore = 0;
-      let matchedKeywords = [];
-
-      for (const cat of CATEGORIES) {
-        if (cat.keywords.length === 0) continue;
-        const matches = cat.keywords.filter(kw => lower.includes(kw));
-        if (matches.length > bestScore) {
-          bestScore = matches.length;
-          bestCategory = cat;
-          matchedKeywords = matches;
-        }
-      }
-
-      // Multiple categories matched = mixed/moderate confidence
-      let matchedCategories = CATEGORIES.filter(cat =>
-        cat.keywords.length > 0 && cat.keywords.some(kw => lower.includes(kw))
-      );
-
-      if (!bestCategory || bestScore === 0) {
-        // No keywords matched — use mixed category with moderate confidence
-        const mixed = CATEGORIES.find(c => c.name === 'mixed');
-        const response = getRotatedResponse('mixed', mixed.responses);
-        return {
-          text: response,
-          confidence: 'moderate',
-          reason: 'Based on: general emotional content detected in your check-in',
-          summary: 'sharing what\'s on your mind'
-        };
-      }
-
-      // Downgrade to moderate if multiple categories matched
-      let confidence = bestCategory.confidence;
-      if (matchedCategories.length >= 2) confidence = 'moderate';
-
-      const response = getRotatedResponse(bestCategory.name, bestCategory.responses);
-      return {
-        text: response,
-        confidence: confidence,
-        reason: bestCategory.reason,
-        summary: bestCategory.summary
-      };
+      if (wordCount < 4) { const r = LOW_CONFIDENCE_RESPONSES[(rotationCounters['low'] || 0) % 2]; rotationCounters['low'] = (rotationCounters['low'] || 0) + 1; return { text: r.text, confidence: 'low', reason: r.reason, summary: r.summary }; }
+      let best = null, bestScore = 0;
+      for (const cat of CATEGORIES) { if (!cat.keywords.length) continue; const m = cat.keywords.filter(kw => lower.includes(kw)); if (m.length > bestScore) { bestScore = m.length; best = cat; } }
+      const matchedCats = CATEGORIES.filter(cat => cat.keywords.length > 0 && cat.keywords.some(kw => lower.includes(kw)));
+      if (!best || bestScore === 0) { const mixed = CATEGORIES.find(c => c.name === 'mixed'); return { text: getRotatedResponse('mixed', mixed.responses), confidence: 'moderate', reason: 'Based on: general emotional content detected in your check-in', summary: "sharing what's on your mind" }; }
+      let confidence = best.confidence;
+      if (matchedCats.length >= 2) confidence = 'moderate';
+      return { text: getRotatedResponse(best.name, best.responses), confidence, reason: best.reason, summary: best.summary };
     }
-
-    // ─── APP STATE ──────────────────────────────────────────────────────
-    let savedSuggestions = [];
-    let currentSuggestion = {};
-
-    function updateChar() {
-      const val = document.getElementById('moodInput').value;
-      document.getElementById('charCount').textContent = val.length;
-    }
-
-    function goToScreen(n) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen' + n).classList.add('active');
-      if (n === 4) renderSaved();
-      if (n === 1) {
-        document.getElementById('moodInput').value = '';
-        document.getElementById('charCount').textContent = '0';
-        document.getElementById('moodInput').classList.remove('needs-more');
-        document.getElementById('elaboratePrompt').classList.remove('show');
-      }
-    }
-
-    function showElaboratePrompt() {
-      const textarea = document.getElementById('moodInput');
-      const prompt = document.getElementById('elaboratePrompt');
-      textarea.classList.add('needs-more');
-      prompt.classList.add('show');
-      textarea.focus();
-      // Scroll prompt into view
-      prompt.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    function clearElaborate() {
-      const val = document.getElementById('moodInput').value.trim();
-      const wordCount = val.split(/\s+/).filter(Boolean).length;
-      if (wordCount >= 4) {
-        document.getElementById('moodInput').classList.remove('needs-more');
-        document.getElementById('elaboratePrompt').classList.remove('show');
-      }
-    }
-
+    let savedSuggestions = loadFromCookie(), currentSuggestion = {};
+    function updateChar() { document.getElementById('charCount').textContent = document.getElementById('moodInput').value.length; }
+    function goToScreen(n) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screen' + n).classList.add('active'); if (n === 4) renderSaved(); if (n === 1) { document.getElementById('moodInput').value = ''; document.getElementById('charCount').textContent = '0'; document.getElementById('moodInput').classList.remove('needs-more'); document.getElementById('elaboratePrompt').classList.remove('show'); } }
+    function clearElaborate() { const val = document.getElementById('moodInput').value.trim(); if (val.split(/\s+/).filter(Boolean).length >= 4) { document.getElementById('moodInput').classList.remove('needs-more'); document.getElementById('elaboratePrompt').classList.remove('show'); } }
     function submitCheckin() {
       const input = document.getElementById('moodInput').value.trim();
-      if (!input) {
-        document.getElementById('moodInput').style.borderColor = 'var(--red)';
-        setTimeout(() => document.getElementById('moodInput').style.borderColor = '', 1500);
-        return;
-      }
-
-      // Too short — stay on Screen 1 and show elaborate prompt
-      const wordCount = input.split(/\s+/).filter(Boolean).length;
-      if (wordCount < 4) {
-        showElaboratePrompt();
-        return;
-      }
-
+      if (!input) { document.getElementById('moodInput').style.borderColor = 'var(--red)'; setTimeout(() => document.getElementById('moodInput').style.borderColor = '', 1500); return; }
+      if (input.split(/\s+/).filter(Boolean).length < 4) { document.getElementById('moodInput').classList.add('needs-more'); document.getElementById('elaboratePrompt').classList.add('show'); document.getElementById('moodInput').focus(); return; }
       goToScreen(2);
-
-      // Simulate a brief thinking delay (500-900ms) for realism
       setTimeout(() => {
         const result = analyseInput(input);
-
-        // Crisis response — override everything
-        if (result.crisis) {
-          currentSuggestion = {
-            text: "It sounds like you may be going through something very difficult right now. Please reach out to someone you trust today. In Bangladesh, Kaan Pete Roi offers confidential mental health support at 01779-554391. You don't have to carry this alone.",
-            confidence: 'low',
-            reason: 'Based on: your message suggests you may need immediate human support',
-            input: 'going through a very difficult time',
-            rawInput: input,
-            date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-          };
-        } else {
-          currentSuggestion = {
-            text: result.text,
-            confidence: result.confidence,
-            reason: result.reason,
-            input: result.summary,
-            rawInput: input,
-            date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-          };
-        }
-
+        if (result.crisis) { currentSuggestion = { text: "It sounds like you may be going through something very difficult right now. Please reach out to someone you trust today. In Bangladesh, Kaan Pete Roi offers confidential mental health support at 01779-554391. You don't have to carry this alone.", confidence: 'low', reason: 'Based on: your message suggests you may need immediate human support', input: 'going through a very difficult time', rawInput: input, date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) }; }
+        else { currentSuggestion = { text: result.text, confidence: result.confidence, reason: result.reason, input: result.summary, rawInput: input, date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) }; }
         showResult();
       }, 600 + Math.random() * 400);
     }
-
     function showResult() {
       const { text, confidence, reason, input } = currentSuggestion;
-
       document.getElementById('suggestionText').textContent = text;
       document.getElementById('sharedText').textContent = input;
       document.getElementById('reasonLine').textContent = reason;
-
       const badge = document.getElementById('confidenceBadge');
       badge.className = 'badge ' + confidence;
-      const labels = { high: 'High Confidence', moderate: 'Moderate Confidence', low: 'Low Confidence' };
-      document.getElementById('confidenceLabel').textContent = labels[confidence];
-
+      document.getElementById('confidenceLabel').textContent = { high: 'High Confidence', moderate: 'Moderate Confidence', low: 'Low Confidence' }[confidence];
       goToScreen(3);
     }
-
-    function saveSuggestion() {
-      savedSuggestions.unshift({ ...currentSuggestion });
-      showToast('Saved to your list! ✓');
-      setTimeout(() => goToScreen(4), 1400);
-    }
-
-    function dismissSuggestion() {
-      showToast('Got it — we\'ll refine future suggestions.');
-      setTimeout(() => goToScreen(1), 1400);
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toastMsg').textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
-    }
-
+    function saveSuggestion() { savedSuggestions.unshift({ ...currentSuggestion }); saveToCookie(savedSuggestions); showToast('Saved to your list! ✓'); setTimeout(() => goToScreen(4), 1400); }
+    function dismissSuggestion() { showToast("Got it — we'll refine future suggestions."); setTimeout(() => goToScreen(1), 1400); }
+    function showToast(msg) { const t = document.getElementById('toast'); document.getElementById('toastMsg').textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
     let levelsRead = new Set();
-
-    function showTooltip() {
-      // Reset state each time tooltip opens
-      levelsRead.clear();
-      document.getElementById('pip1').classList.remove('seen');
-      document.getElementById('pip2').classList.remove('seen');
-      document.getElementById('pip3').classList.remove('seen');
-      document.getElementById('gotItBtn').disabled = true;
-      document.getElementById('task2Success').classList.remove('show');
-      document.getElementById('readHint').classList.remove('hidden');
-      document.getElementById('tooltipScroll').scrollTop = 0;
-      document.getElementById('tooltipOverlay').classList.add('show');
-
-      // Set up scroll observer after render
-      setTimeout(initReadTracker, 50);
-    }
-
+    function showTooltip() { levelsRead.clear();['pip1', 'pip2', 'pip3'].forEach(id => document.getElementById(id).classList.remove('seen')); document.getElementById('gotItBtn').disabled = true; document.getElementById('task2Success').classList.remove('show'); document.getElementById('readHint').classList.remove('hidden'); document.getElementById('tooltipScroll').scrollTop = 0; document.getElementById('tooltipOverlay').classList.add('show'); setTimeout(initReadTracker, 50); }
     function initReadTracker() {
       const scroll = document.getElementById('tooltipScroll');
-      const levels = [
-        document.getElementById('level1'),
-        document.getElementById('level2'),
-        document.getElementById('level3')
-      ];
-
+      const levels = [document.getElementById('level1'), document.getElementById('level2'), document.getElementById('level3')];
       function checkVisible() {
         const scrollRect = scroll.getBoundingClientRect();
-        levels.forEach((el, i) => {
-          if (!el) return;
-          const rect = el.getBoundingClientRect();
-          const visible = rect.top < scrollRect.bottom - 20 && rect.bottom > scrollRect.top + 20;
-          if (visible) {
-            levelsRead.add(i + 1);
-            document.getElementById('pip' + (i + 1)).classList.add('seen');
-          }
+        levels.forEach((el, i) => { if (!el) return; const rect = el.getBoundingClientRect(); if (rect.top < scrollRect.bottom - 20 && rect.bottom > scrollRect.top + 20) { levelsRead.add(i + 1); document.getElementById('pip' + (i + 1)).classList.add('seen'); } });
+        if (levelsRead.size === 3) { document.getElementById('gotItBtn').disabled = false; document.getElementById('task2Success').classList.add('show'); document.getElementById('readHint').classList.add('hidden'); scroll.removeEventListener('scroll', checkVisible); }
+      }
+      scroll.addEventListener('scroll', checkVisible); checkVisible();
+    }
+    function completeTask2() { document.getElementById('tooltipOverlay').classList.remove('show'); showToast('You now understand how confidence works!'); }
+    function hideTooltip(e) { if (!e || e.target === document.getElementById('tooltipOverlay')) document.getElementById('tooltipOverlay').classList.remove('show'); }
+    let activeChatHistory = [];
+    let activeSuggestion = {};
+    let contextExpanded = true;
+
+    function openSavedDetail(idx) {
+      const s = savedSuggestions[idx];
+      activeSuggestion = s;
+      activeChatHistory = [];
+      contextExpanded = true;
+      const labels = { high: 'High Confidence', moderate: 'Moderate Confidence', low: 'Low Confidence' };
+      const rawQ = s.rawInput || s.input || '—';
+      document.getElementById('s5HeaderTitle').textContent = rawQ.length > 32 ? rawQ.slice(0, 32) + '…' : rawQ;
+      document.getElementById('s5HeaderSub').textContent = s.date || 'Saved suggestion';
+      const hb = document.getElementById('s5HeaderBadge'); hb.className = 'badge ' + s.confidence; hb.style.cssText = 'font-size:11px;padding:3px 10px;flex-shrink:0';
+      document.getElementById('s5HeaderBadgeLabel').textContent = labels[s.confidence];
+      document.getElementById('s5CtxQuery').textContent = rawQ;
+      document.getElementById('s5CtxSuggestion').textContent = s.text;
+      const cb = document.getElementById('s5CtxBadge'); cb.className = 'badge ' + s.confidence; cb.style.cssText = 'font-size:11px;padding:3px 10px';
+      document.getElementById('s5CtxBadgeLabel').textContent = labels[s.confidence];
+      document.getElementById('s5CtxReason').textContent = s.reason || '';
+      const ctx = document.getElementById('s5Context');
+      ctx.className = 's5-context expanded';
+      document.getElementById('s5ToggleLabel').textContent = 'Hide context';
+      document.getElementById('s5ToggleIcon').className = 's5-toggle-icon up';
+      const area = document.getElementById('s5ChatArea');
+      area.innerHTML = '';
+      const empty = document.createElement('div'); empty.className = 's5-empty-chat'; empty.id = 's5EmptyChat';
+      empty.innerHTML = `<svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><p>Continue the conversation</p><small>Ask a follow-up or share how you're feeling now</small>`;
+      area.appendChild(empty);
+      document.getElementById('s5Input').value = '';
+      document.getElementById('s5Input').style.height = 'auto';
+      goToScreen(5);
+      setTimeout(() => document.getElementById('s5Input').focus(), 300);
+    }
+
+    function toggleContext() {
+      contextExpanded = !contextExpanded;
+      const ctx = document.getElementById('s5Context');
+      const lbl = document.getElementById('s5ToggleLabel');
+      const ico = document.getElementById('s5ToggleIcon');
+      if (contextExpanded) { ctx.className = 's5-context expanded'; lbl.textContent = 'Hide context'; ico.className = 's5-toggle-icon up'; }
+      else { ctx.className = 's5-context collapsed'; lbl.textContent = 'Show context'; ico.className = 's5-toggle-icon'; }
+    }
+
+    function s5Resize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 90) + 'px'; }
+    function s5Keydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); s5Send(); } }
+
+    function s5Send() {
+      const input = document.getElementById('s5Input').value.trim();
+      if (!input) return;
+      document.getElementById('s5Input').value = '';
+      document.getElementById('s5Input').style.height = 'auto';
+      document.getElementById('s5SendBtn').disabled = true;
+      const area = document.getElementById('s5ChatArea');
+      const empty = document.getElementById('s5EmptyChat');
+      if (empty) empty.remove();
+      if (!contextExpanded) { toggleContext(); }
+      setTimeout(() => toggleContext(), 80);
+      const userBubble = document.createElement('div');
+      userBubble.className = 's5-bubble user';
+      userBubble.textContent = input;
+      area.appendChild(userBubble);
+      const thinkBubble = document.createElement('div');
+      thinkBubble.className = 's5-bubble ai thinking';
+      thinkBubble.innerHTML = '<div class="s5-bubble-from">MindCheck</div><div class="s5-bubble-text">Thinking…</div>';
+      area.appendChild(thinkBubble);
+      area.scrollTop = area.scrollHeight;
+      activeChatHistory.push({ role: 'user', content: input });
+      const systemPrompt = `You are MindCheck, a supportive AI mental health companion for university students. Keep responses warm, practical, and concise (2–4 sentences max). Never diagnose. Always encourage professional help for serious concerns.\n\nContext — the student's original check-in: "${activeSuggestion.rawInput || activeSuggestion.input}"\nYour earlier suggestion: "${activeSuggestion.text}"`;
+      const messages = [{ role: 'user', content: `[System context]\n${systemPrompt}` }, { role: 'assistant', content: "Understood. I'm here to continue supporting you." }, ...activeChatHistory];
+      fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 300, messages })
+      })
+        .then(r => r.json())
+        .then(data => {
+          const reply = (data.content && data.content.map(b => b.text || '').join('')) || "I'm here with you. Could you tell me a bit more about what you're feeling right now?";
+          activeChatHistory.push({ role: 'assistant', content: reply });
+          thinkBubble.className = 's5-bubble ai';
+          thinkBubble.innerHTML = `<div class="s5-bubble-from">MindCheck</div><div class="s5-bubble-text">${reply}</div>`;
+          area.scrollTop = area.scrollHeight;
+          document.getElementById('s5SendBtn').disabled = false;
+          document.getElementById('s5Input').focus();
+        })
+        .catch(() => {
+          const fallback = "I'm here to listen. What's on your mind right now?";
+          thinkBubble.className = 's5-bubble ai';
+          thinkBubble.innerHTML = `<div class="s5-bubble-from">MindCheck</div><div class="s5-bubble-text">${fallback}</div>`;
+          activeChatHistory.push({ role: 'assistant', content: fallback });
+          document.getElementById('s5SendBtn').disabled = false;
+          area.scrollTop = area.scrollHeight;
         });
-
-        if (levelsRead.size === 3) {
-          document.getElementById('gotItBtn').disabled = false;
-          document.getElementById('task2Success').classList.add('show');
-          document.getElementById('readHint').classList.add('hidden');
-          scroll.removeEventListener('scroll', checkVisible);
-        }
-      }
-
-      scroll.addEventListener('scroll', checkVisible);
-      checkVisible(); // check immediately in case all visible without scrolling
     }
 
-    function completeTask2() {
-      document.getElementById('tooltipOverlay').classList.remove('show');
-      showToast('You now understand how confidence works!');
-    }
-
-    function hideTooltip(e) {
-      if (!e || e.target === document.getElementById('tooltipOverlay')) {
-        document.getElementById('tooltipOverlay').classList.remove('show');
-      }
-    }
-
+    function deleteSuggestion(idx) { savedSuggestions.splice(idx, 1); saveToCookie(savedSuggestions); renderSaved(); showToast('Suggestion removed.'); }
+    function clearAllSuggestions() { savedSuggestions = []; saveToCookie(savedSuggestions); renderSaved(); showToast('All suggestions cleared.'); }
     function renderSaved() {
-      const list = document.getElementById('savedList');
-      const empty = document.getElementById('emptyState');
+      const list = document.getElementById('savedList'), empty = document.getElementById('emptyState');
       document.getElementById('savedCount').textContent = savedSuggestions.length + ' saved';
-
-      if (savedSuggestions.length === 0) {
-        empty.style.display = 'flex';
-        const cards = list.querySelectorAll('.saved-card');
-        cards.forEach(c => c.remove());
-        return;
-      }
-
+      const existing = list.querySelectorAll('.saved-card,.clear-btn-row'); existing.forEach(c => c.remove());
+      if (!savedSuggestions.length) { empty.style.display = 'flex'; return; }
       empty.style.display = 'none';
-      const cards = list.querySelectorAll('.saved-card');
-      cards.forEach(c => c.remove());
-
-      savedSuggestions.forEach(s => {
+      const clearRow = document.createElement('div');
+      clearRow.className = 'clear-btn-row';
+      clearRow.style.cssText = 'display:flex;justify-content:flex-end;margin-bottom:4px';
+      clearRow.innerHTML = `<button onclick="clearAllSuggestions()" style="background:none;border:none;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--red);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px">Clear all</button>`;
+      list.insertBefore(clearRow, empty);
+      savedSuggestions.forEach((s, i) => {
         const labels = { high: 'High Confidence', moderate: 'Moderate Confidence', low: 'Low Confidence' };
         const card = document.createElement('div');
         card.className = 'saved-card fade-in';
+        card.style.cssText = 'cursor:pointer;transition:box-shadow .2s';
+        card.onmouseenter = () => card.style.boxShadow = 'var(--shadow-lg)';
+        card.onmouseleave = () => card.style.boxShadow = '';
         card.innerHTML = `
-        <div class="saved-card-text">${s.text}</div>
-        <div class="saved-card-meta">
-          <span class="badge ${s.confidence}" style="font-size:12px;padding:3px 10px">
-            <span class="badge-dot"></span>
-            ${labels[s.confidence]}
-          </span>
-          <span class="saved-card-date">${s.date}</span>
-        </div>
-      `;
+          <div class="saved-card-text">${s.text}</div>
+          <div class="saved-card-meta">
+            <span class="badge ${s.confidence}" style="font-size:12px;padding:3px 10px"><span class="badge-dot"></span>${labels[s.confidence]}</span>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span class="saved-card-date">${s.date}</span>
+              <button onclick="event.stopPropagation();deleteSuggestion(${i})" title="Remove" style="background:none;border:none;cursor:pointer;color:var(--text-light);font-size:16px;line-height:1;padding:2px 4px;transition:color .15s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--text-light)'">×</button>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;gap:5px;font-size:12px;color:var(--blue);font-weight:500">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Tap to view & continue chat
+          </div>`;
+        card.onclick = () => openSavedDetail(i);
         list.appendChild(card);
       });
     }
-
-    // Live clock
-    function updateClock() {
-      const now = new Date();
-      document.getElementById('statusTime').textContent =
-        now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
-    }
-    updateClock();
-    setInterval(updateClock, 10000);
+    function updateClock() { const now = new Date(); document.getElementById('statusTime').textContent = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0'); }
+    updateClock(); setInterval(updateClock, 10000);
   </script>
 </body>
 
