@@ -1777,9 +1777,11 @@
         card.style.cssText = 'cursor:pointer;transition:box-shadow .2s';
         card.onmouseenter = () => card.style.boxShadow = 'var(--shadow-lg)';
         card.onmouseleave = () => card.style.boxShadow = '';
+        const query = s.rawInput || s.input || '—';
         card.innerHTML = `
-          <div class="saved-card-text">${s.text}</div>
-          <div class="saved-card-meta">
+          <div style="font-size:10px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px">Your check-in</div>
+          <div class="saved-card-text" style="color:var(--text);font-weight:500;font-size:14px">${query}</div>
+          <div class="saved-card-meta" style="margin-top:10px">
             <span class="badge ${s.confidence}" style="font-size:12px;padding:3px 10px"><span class="badge-dot"></span>${labels[s.confidence]}</span>
             <div style="display:flex;align-items:center;gap:10px">
               <span class="saved-card-date">${s.date}</span>
