@@ -1178,7 +1178,9 @@
     #screen5 {
       padding: 0;
       display: none;
-      flex-direction: column
+      flex-direction: column;
+      height: 600px;
+      overflow: hidden
     }
 
     #screen5.active {
@@ -1343,6 +1345,7 @@
 
     .s5-chat-area {
       flex: 1;
+      min-height: 0;
       overflow-y: auto;
       padding: 16px 20px;
       display: flex;
