@@ -431,8 +431,9 @@
 
     .reason-line {
       font-size: 13px;
-      color: var(--text-muted);
-      font-style: italic;
+      color: var(--text);
+      font-style: normal;
+      font-weight: 500;
       padding-top: 10px;
       border-top: 1px solid var(--border)
     }
@@ -496,6 +497,27 @@
 
     .new-checkin-btn:hover {
       color: var(--text)
+    }
+
+    .btn-continue {
+      width: 100%;
+      background: var(--blue-light);
+      border: 1.5px solid var(--blue);
+      border-radius: var(--radius-sm);
+      padding: 13px 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--blue);
+      cursor: pointer;
+      transition: all .15s;
+      text-align: center;
+      margin-bottom: 10px
+    }
+
+    .btn-continue:hover {
+      background: var(--blue);
+      color: white
     }
 
     .toast {
@@ -1615,7 +1637,7 @@
           <rect x="3" y="11" width="18" height="11" rx="2" />
           <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
-        No account needed. Your chats are stored only on this device.
+        No account needed. Your chats are stored only on this device — saved in your browser, never sent to any server.
       </div>
       <button class="btn-primary" onclick="submitCheckin()">Get Support</button>
     </div>
@@ -1655,6 +1677,7 @@
         <button class="btn-outline" onclick="dismissSuggestion()">Not relevant</button>
         <button class="btn-save" onclick="saveSuggestion()">This helps — save it</button>
       </div>
+      <button class="btn-continue" onclick="openCurrentChat()">Continue talking about this →</button>
       <button class="new-checkin-btn" onclick="goToScreen(1)">Start a new check-in</button>
     </div>
 
@@ -1781,7 +1804,7 @@
             <div class="level-dot amber"></div>
             <div>
               <div class="level-name">Moderate Confidence</div>
-              <div class="level-desc">Your input had mixed signals — this suggestion may be relevant but use your own
+              <div class="level-desc">Your check-in contained overlapping concerns — this suggestion is a good starting point but use your own
                 judgment to decide if it fits your situation.</div>
             </div>
           </div>
@@ -1889,7 +1912,24 @@
     function dismissSuggestion() { showToast("Got it — we'll refine future suggestions."); setTimeout(() => goToScreen(1), 1400); }
     function showToast(msg) { const t = document.getElementById('toast'); document.getElementById('toastMsg').textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
     let levelsRead = new Set();
-    function showTooltip() { levelsRead.clear();['pip1', 'pip2', 'pip3'].forEach(id => document.getElementById(id).classList.remove('seen')); document.getElementById('gotItBtn').disabled = true; document.getElementById('task2Success').classList.remove('show'); document.getElementById('readHint').classList.remove('hidden'); document.getElementById('tooltipScroll').scrollTop = 0; document.getElementById('tooltipOverlay').classList.add('show'); setTimeout(initReadTracker, 50); }
+    function showTooltip() {
+      const hasReadBefore = document.cookie.includes('tooltip_read=1');
+      levelsRead.clear();
+      ['pip1','pip2','pip3'].forEach(id => document.getElementById(id).classList.remove('seen'));
+      document.getElementById('tooltipScroll').scrollTop = 0;
+      document.getElementById('tooltipOverlay').classList.add('show');
+      if (hasReadBefore) {
+        ['pip1','pip2','pip3'].forEach(id => document.getElementById(id).classList.add('seen'));
+        document.getElementById('gotItBtn').disabled = false;
+        document.getElementById('task2Success').classList.add('show');
+        document.getElementById('readHint').classList.add('hidden');
+      } else {
+        document.getElementById('gotItBtn').disabled = true;
+        document.getElementById('task2Success').classList.remove('show');
+        document.getElementById('readHint').classList.remove('hidden');
+        setTimeout(initReadTracker, 50);
+      }
+    }
     function initReadTracker() {
       const scroll = document.getElementById('tooltipScroll');
       const levels = [document.getElementById('level1'), document.getElementById('level2'), document.getElementById('level3')];
@@ -1900,8 +1940,18 @@
       }
       scroll.addEventListener('scroll', checkVisible); checkVisible();
     }
-    function completeTask2() { document.getElementById('tooltipOverlay').classList.remove('show'); showToast('You now understand how confidence works!'); }
+    function completeTask2() {
+      document.cookie = 'tooltip_read=1;path=/;max-age=31536000';
+      document.getElementById('tooltipOverlay').classList.remove('show');
+      showToast('You now understand how confidence works!');
+    }
     function hideTooltip(e) { if (!e || e.target === document.getElementById('tooltipOverlay')) document.getElementById('tooltipOverlay').classList.remove('show'); }
+    function openCurrentChat() {
+      savedSuggestions.unshift({ ...currentSuggestion });
+      saveToCookie(savedSuggestions);
+      document.getElementById('prevCount').textContent = savedSuggestions.length;
+      openSavedDetail(0);
+    }
     let activeChatHistory = [];
     let activeSuggestion = {};
     let contextExpanded = true;
