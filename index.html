@@ -1662,7 +1662,6 @@
         </svg>
         Home
       </button>
-      <div class="you-shared">You mentioned: <span id="sharedText">feeling overwhelmed</span></div>
       <div class="suggestion-card fade-in">
         <div class="suggestion-label">AI Suggestion</div>
         <div class="suggestion-text" id="suggestionText">Loading suggestion…</div>
@@ -1900,8 +1899,7 @@
     }
     function showResult() {
       const { text, confidence, reason, input } = currentSuggestion;
-      document.getElementById('suggestionText').textContent = text;
-      document.getElementById('sharedText').textContent = input;
+      document.getElementById('suggestionText').textContent = text; const sharedEl = document.getElementById('sharedText'); if (sharedEl) sharedEl.textContent = input;
       document.getElementById('reasonLine').textContent = reason;
       const badge = document.getElementById('confidenceBadge');
       badge.className = 'badge ' + confidence;
